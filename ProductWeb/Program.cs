@@ -2,13 +2,14 @@ global using ProductWeb.Models;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using ProductWeb.Data;
-using ProductWeb.Service;
+global using ProductWeb.Service;
+global using ProductWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ProductContext>();
 
-builder.Services.AddDefaultIdentity<User>(options =>
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireLowercase = false;
@@ -21,6 +22,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,5 +39,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();

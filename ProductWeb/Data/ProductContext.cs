@@ -15,5 +15,6 @@ namespace ProductWeb.Data
             optionsBuilder.UseSqlServer("Server=LAPTOP-M8KR7TQE;Database=ProductWebDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

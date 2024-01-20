@@ -5,10 +5,10 @@ namespace ProductWeb.Service
     public class RoleService : IRoleService
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
 
-        public RoleService(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RoleService(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
