@@ -3,7 +3,8 @@
     <div class="col-8">
         <form asp-action="UpCreate" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.HiddenFor(Model=>Model.Product.Id)
+            @Html.HiddenFor(Model => Model.Product.Id)
+            @Html.HiddenFor(Model => Model.Product.ImageUrl)
             <div>
                 <label asp-for="Product.Name" class="form-label">Name</label>
                 <input asp-for="Product.Name" class="form-control">
@@ -35,10 +36,19 @@
             <a class="btn btn-secondary" asp-action="Index">Back</a>
         </form>
         <div class="col-4">
-           
+            
         </div>
     </div>
-    <div class="col-4"> <img src="@Model.Product.ImageUrl" width="100%" class="m-2 border rounded" id="output" /></div>
+    <div class="col-4">
+        @if (!string.IsNullOrEmpty(Model.Product.ImageUrl)) //Update
+        {
+            <img src="@(SD.ProductPath+"\\"+Model.Product.ImageUrl)" width="100%" class="m-2 border rounded" id="output" />
+        }
+        else //Display
+        {
+            <img width="100%" class="m-2 border rounded" id="output" />
+        }
+    </div>
 </div>
 @section Scripts {
     @{
