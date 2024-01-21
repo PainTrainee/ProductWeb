@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary" style="font-size:2rem;"><i class="bi bi-plus"></i></a>
+    <a asp-action="UpCreate" class="btn btn-primary" style="font-size:2rem;"><i class="bi bi-plus"></i></a>
 </p>
 <table class="table" id="myTable">
     <thead>
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.Raw(item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-action="UpCreate" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                 @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary" onclick="return confirm('Confirm delete')"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }

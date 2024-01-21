@@ -48,11 +48,21 @@ namespace ProductWeb.Controllers
             productContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var product = productContext.Categories.Find(id);
-            productContext.Categories.Remove(product);
-            productContext.SaveChanges();
+            var category = productContext.Categories.Find(id);
+            if (category != null)
+            {
+                var product = productContext.Products.Where(p => p.CategoryId == id).FirstOrDefault();
+                if (product != null)
+                {
+                    TempData["Message"] = "This category is in used. Can't Delete.";
+                    return RedirectToAction(nameof(Index));
+                }
+                productContext.Categories.Remove(category);
+                productContext.SaveChanges();
+                TempData["Message"] = "Delete Sucessfully.";
+            }
             return RedirectToAction(nameof(Index));
         }
     }

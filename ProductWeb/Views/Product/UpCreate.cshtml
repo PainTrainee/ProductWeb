@@ -1,0 +1,62 @@
+﻿@model ProductVM
+<div class="row">
+    <div class="col-8">
+        <form asp-action="UpCreate" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(Model=>Model.Product.Id)
+            <div>
+                <label asp-for="Product.Name" class="form-label">Name</label>
+                <input asp-for="Product.Name" class="form-control">
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <textarea asp-for="Product.Description" class="form-control"></textarea>
+                <span asp-validation-for="Product.Description"class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" type="number" min="0" class="form-control">
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div>
+                <select class="form-select" asp-for="Product.CategoryId" asp-items="Model.CategoryList">
+                    <option disabled selected>Category</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ImageUrl" class="control-label"></label>
+                <input type="file" id="uploadBox" name="file" class="form-control" onchange="loadFile(event)" />
+            </div>
+            <button type="submit" class="btn @(Model.Product.Id == 0 ? "btn-primary" : "btn-danger")">
+                @(Model.Product.Id == 0 ? "Create" : "Update")
+            </button>
+            <a class="btn btn-secondary" asp-action="Index">Back</a>
+        </form>
+        <div class="col-4">
+            <img src="@Model.Product.ImageUrl" width="100%" class="m-2 border rounded" id="output" />
+        </div>
+    </div>
+    <div class="col-4">Image</div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',
+                'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+                'powerpaste', 'fullscreen', 'formatpainter', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+                'alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+        });
+    </script>
+}
