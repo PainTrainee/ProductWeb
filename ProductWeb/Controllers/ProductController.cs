@@ -124,5 +124,6 @@ namespace ProductWeb.Controllers
             TempData["Message"] = "Delete Successfully.";
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
