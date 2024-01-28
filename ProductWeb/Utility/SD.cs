@@ -11,5 +11,6 @@
         public const string StatusCancelled = "Cancelled";
         public const string ImagePath = @"\images";
         public const string ProductPath = ImagePath + @"\products";
+        public const string PaymentPath = ImagePath + @"\payments";
     }
 }

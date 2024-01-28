@@ -1,6 +1,7 @@
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using ProductWeb.Data;
+global using ProductWeb.ViewModels;
 global using ProductWeb.Models;
 global using ProductWeb.Service;
 global using ProductWeb.Utility;
