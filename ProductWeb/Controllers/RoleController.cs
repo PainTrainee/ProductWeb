@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductWeb.Service;
 
 namespace ProductWeb.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
